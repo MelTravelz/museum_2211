@@ -1,12 +1,14 @@
 class Museum
   attr_reader :name, 
               :exhibits,
-              :patrons
+              :patrons,
+              :patrons_by_interests
 
   def initialize(name)
     @name = name
     @exhibits = []
     @patrons = []
+    @patrons_by_interests = {}
   end
 
   def add_exhibit(topic)
@@ -21,5 +23,23 @@ class Museum
 
   def admit(patron)
     patrons << patron
+  end
+
+  def patrons_by_exhibit_interest
+    @exhibits.each do |exhibit|
+      
+      if patrons_by_interests[exhibit.name].nil? 
+        patrons_by_interests[exhibit.name] = []
+      end
+
+      @patrons.each do |patron|
+        patron.interests.include?(exhibit.name)
+        patrons_by_interests[exhibit.name] << patron
+      end
+
+      patrons_by_interests
+      # require 'pry'; binding.pry
+     
+    end
   end
 end

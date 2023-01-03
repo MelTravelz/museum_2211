@@ -72,7 +72,7 @@ RSpec.describe Museum do
   end
 
   describe "#patrons_by_exhibit_interest" do
-    it "can admit patrons who have an interest in exhibit" do
+    it "can group patrons who have an interest in an exhibit" do
       dmns.add_exhibit(gems_and_minerals)
       dmns.add_exhibit(dead_sea_scrolls)
       dmns.add_exhibit(imax)
@@ -81,6 +81,10 @@ RSpec.describe Museum do
       patron_1.add_interest("Dead Sea Scrolls")
       patron_2.add_interest("Dead Sea Scrolls")
       patron_3.add_interest("Dead Sea Scrolls")
+
+      dmns.admit(patron_1)
+      dmns.admit(patron_2)
+      dmns.admit(patron_3)
 
       expected_hash = {
         gems_and_minerals => [patron_1],
